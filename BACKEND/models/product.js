@@ -2,16 +2,21 @@
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
-    id : {
-        type : String,
-        required : true,
-        unique : true
-    },
+   
     name : {
         type : String,
         required : true
     },
     category : {
+        type : String,
+        required : true
+    },
+    description : {
+        type : String,
+        required : true
+    }
+    ,
+    specification : {
         type : String,
         required : true
     },
@@ -22,9 +27,37 @@ const productSchema = new mongoose.Schema({
     model_Number : {
         type : String,
         required : true
+    },
+    price : {
+        type : String,
+        required : true
+    },
+    quantity_Stock : {
+        type : Number,
+        required : true
+    },
+    warenty_Period : {
+        type : Date,
+        required : true
+    },
+    brand_image : {
+        type : String,
+        required : true
+    }
+    ,
+    Image : {
+        type : String,
+        required : true
+    },
+    created_at : {
+        type : Date,
+        default : Date.now()
     }
 
+
 })
+
+
 
 const Product = mongoose.model("product",productSchema);
 
