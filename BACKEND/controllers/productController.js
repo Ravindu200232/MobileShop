@@ -95,3 +95,31 @@ export async function productUpdate(req,res) {
     }
     
 }
+
+export function productDelete(req,res){
+
+    if(isHasAccount(req)){
+
+        if(itIsAdmin(req)){
+
+            Product.deleteOne({
+                _id : req.params.id
+            }).then(
+                ()=>{
+                    res.json({
+                        message : "Delete Successfully"
+                    })
+                }
+            )
+        }else{
+            res.json({
+                message : "Do not access this task"
+            })
+        }
+    }else{
+        res.json({
+            message : "Do not access this task"
+        })
+
+    }
+}

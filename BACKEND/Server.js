@@ -5,6 +5,7 @@ import { DBconnection } from "./DBconnection.js";
 import userRoute from "./routes/userRoute.js";
 import productRoute from "./routes/productRoute.js";
 import jwt from "jsonwebtoken"
+import reviewRoute from "./routes/reviewRoute.js";
 
 dotenv.config();
 
@@ -35,6 +36,7 @@ DBconnection();
 
 app.use("/api/user",userRoute)
 app.use("/api/product",productRoute)
+app.use("/api/review",reviewRoute)
 
 
 app.listen(4000 || process.env.PORT,()=>{
