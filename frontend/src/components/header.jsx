@@ -1,0 +1,47 @@
+import logo from "../assets/img/—Pngtree—smartphone shop sale logo design_5069958.png"
+import { CiSearch } from "react-icons/ci";
+import { CiHeart } from "react-icons/ci";
+import { CiShoppingCart } from "react-icons/ci";
+import { CiUser } from "react-icons/ci";
+
+export default function Header(){
+
+    return(
+        <div className=" w-screen h-[100px] flex flex-wrap bg-white">
+            <div className=" w-[100px] h-[100px] bg-white ml-32">
+                <img src={logo} className="w-full h-full"></img>
+            </div>
+            <div className="flex justify-around items-center h-full w-96 bg-white ml-10 ">
+                <div className="w-full h-10 rounded-xl justify-start items-center bg-gray-200  flex" >
+                <CiSearch className="size-6 ml-5"/>
+                <input type="text" className="ml-2  bg-gray-200 outline-none border-none"></input>
+                </div>
+                
+
+            </div>
+
+            <div className="w-96 h-full bg-white ml-5 flex justify-between items-center">
+                <tr>
+                    <td><button className="ml-5 hover:text-gray-400">Home</button></td>
+                    <td><button className="ml-5  hover:text-gray-400">Product</button></td>
+                    <td><button className="ml-5  hover:text-gray-400">About</button></td>
+                    <td><button className="ml-5  hover:text-gray-400">ContactUs</button></td>
+                    <td><button className="ml-5  hover:text-gray-400">Blog</button></td>
+                </tr>
+
+            </div>
+
+            <div className="h-full w-80 ml-5 bg-white flex justify-between items-center">
+                <tr>
+                    <td><button className="ml-5 hover:text-gray-400"><CiHeart className="size-8"/></button></td>
+                    <td><button className="ml-5  hover:text-gray-400"><CiShoppingCart className="size-8"/></button></td>
+                    <td><button className="ml-5  hover:text-gray-400"><CiUser className="size-8"/></button></td>
+                   
+                </tr>
+
+            </div>
+            
+
+        </div>
+    )
+}
