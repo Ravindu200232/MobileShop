@@ -1,4 +1,4 @@
-import logo from "../assets/img/—Pngtree—smartphone shop sale logo design_5069958.png"
+import logo from "/—Pngtree—smartphone shop sale logo design_5069958.png"
 import { CiSearch } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { CiShoppingCart } from "react-icons/ci";
@@ -7,7 +7,7 @@ import { CiUser } from "react-icons/ci";
 export default function Header(){
 
     return(
-        <div className=" w-screen h-[100px] flex flex-wrap  bg-white relative justify-center items-center shadow-xl ">
+        <div className=" w-full h-[100px] flex flex-wrap  bg-white relative justify-center items-center shadow-xl ">
             <div className=" w-[100px] h-[100px] bg-blue-300 object-cover">
                 <img src={logo} className="w-full h-full"></img>
             </div>

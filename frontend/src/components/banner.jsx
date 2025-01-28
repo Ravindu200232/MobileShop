@@ -8,18 +8,21 @@ export default function Banner() {
       title: "iPhone 15 Pro",
       subtitle: "Pro. Beyond.",
       description: "Created to change everything for the better. For everyone.",
+      link : "",
     },
     {
       image: "/poster2.jpg",
-      title: "MacBook Pro M3",
+      title: "SAMSUNG S25",
       subtitle: "Power. Reimagined.",
       description: "The ultimate device for creators and professionals.",
+      link : "",
     },
     {
       image: "/poster3.jpg",
-      title: "Apple Watch Series 9",
+      title: "Google PIXEL 9",
       subtitle: "Future on Your Wrist.",
       description: "Advanced health and fitness features. Redesigned.",
+      link : "",
     },
   ];
 
@@ -38,25 +41,28 @@ export default function Banner() {
   const currentSlide = slides[currentSlideIndex]; // Get current slide data
 
   return (
-    <div className="w-screen h-[calc(100vh/1.5)] relative flex justify-center items-center bg-gray-100 overflow-hidden">
-      {/* Background Image */}
-      <img
-        src={currentSlide.image}
-        alt={`slide-${currentSlideIndex}`}
-        className="w-full h-full object-cover"
-      />
-
-      {/* Overlay Text */}
-      <div className="absolute flex flex-col left-[150px] bottom-[150px] text-white">
-        <h3 className="text-xl">{currentSlide.subtitle}</h3>
-        <h1 className="text-6xl font-bold">{currentSlide.title}</h1>
-        <h4 className="font-semibold text-gray-300 mt-2">
-          {currentSlide.description}
-        </h4>
-        <button className="mt-5 px-6 py-3 bg-gray-400 rounded-3xl hover:bg-gray-700">
+    <div className="w-screen h-[600px] flex justify-center items-center bg-gray-100 relative overflow-hidden flex-wrap">
+    {/* Background Image */}
+    <img
+      src={currentSlide.image}
+      alt={`Slide ${currentSlideIndex}`}
+      className="w-full h-full object-cover"
+    />
+  
+    {/* Text Overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30" />
+    <div className="absolute left-4 sm:left-20 bottom-10 text-white max-w-[500px] space-y-4">
+      <h3 className="text-lg">{currentSlide.subtitle}</h3>
+      <h1 className="text-4xl sm:text-6xl font-bold">{currentSlide.title}</h1>
+      <p className="text-gray-200">{currentSlide.description}</p>
+      <a href={currentSlide.link}>
+        <button className="px-6 py-3 bg-gray-800 rounded-lg hover:bg-blue-800 transition">
           Shop Now
         </button>
-      </div>
+      </a>
     </div>
+  </div>
+
+
   );
 }
