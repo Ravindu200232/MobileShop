@@ -60,7 +60,8 @@ export async function userLogin(req,res) {
 
                res.json({
                 message : "Login successfully",
-                token : token
+                token : token,
+                user : checkEmail
                }) 
             }else{
                 res.status(403).json({

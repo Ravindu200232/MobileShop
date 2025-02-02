@@ -6,10 +6,13 @@ import userRoute from "./routes/userRoute.js";
 import productRoute from "./routes/productRoute.js";
 import jwt from "jsonwebtoken"
 import reviewRoute from "./routes/reviewRoute.js";
+import cors from "cors"
 
 dotenv.config();
 
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.json());
 
