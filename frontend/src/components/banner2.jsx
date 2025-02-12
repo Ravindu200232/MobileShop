@@ -87,44 +87,46 @@ export default function Banner2(){
 
 
     return(
-        <div className="w-screen h-[600px] flex  text-white flex-wrap ">
+        <div className="w-screen md:h-[600px] min-h-full flex  text-white flex-wrap md:flex-row flex-col">
             
-            <div className="w-1/2 h-full ">
+            <div className="md:w-1/2 h-full w-full flex-col md:flex-row">
 
-                <div className="w-full h-1/2 bg-white relative justify-center ">
+                {/* poster 1 */}
+                <div className="w-full h-1/2 md:h-1/2 bg-white relative justify-center ">
                 <img src={currentSlide1.image} alt={`Slide ${setCurrentSlideIndex1}`} className="w-full h-full object-cover"/>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30 w-full h-full  justify-center">
-                        <h1 className="mt-52 ml-10 text-2xl font-bold">{currentSlide1.title}</h1>
-                        <h2 className="ml-10">{currentSlide1.details}</h2>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30 w-full h-full  justify-center ">
+                        <h1 className="left-4 bottom-14 text-2xl font-bold absolute">{currentSlide1.title}</h1>
+                        <h2 className=" absolute left-4 bottom-6">{currentSlide1.details}</h2>
                     </div>
                 </div>
-
-                <div className="w-full h-1/2  flex">
-
-                    <div className="w-1/2 h-full relative justify-center">
-                    <img src={currentSlide2.image} alt={`Slide ${setCurrentSlideIndex2}`} className="w-full h-full object-cover"/>
+                
+                <div className="md:w-full md:h-1/2  md:flex-row w-full h-1/2 flex flex-col ">
+                    {/* poster 2 */}
+                    <div className="md:w-1/2 h-full relative justify-center ">
+                    <img src={currentSlide2.image} alt={`Slide ${setCurrentSlideIndex2}`} className="w-full h-full object-cover "/>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30 w-full h-full  justify-center">
-                        <h1 className="mt-52 ml-10 text-2xl font-bold">{currentSlide2.title}</h1>
-                        <h2 className="ml-10">{currentSlide2.details}</h2>
+                        <h1 className="  text-2xl font-bold left-4 absolute bottom-14">{currentSlide2.title}</h1>
+                        <h2 className=" absolute left-4 md:bottom-2 bottom-4">{currentSlide2.details}</h2>
                     </div>
                     </div> 
-
-                    <div className="w-1/2 h-full relative justify-center">
+                  {/* poster 3 */}
+                    <div className="md:w-1/2 h-full  relative justify-center">
                     <img src={currentSlide3.image} alt={`Slide ${setCurrentSlideIndex3}`} className="w-full h-full object-cover"/>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30 w-full h-full  justify-center">
-                        <h1 className="mt-52 ml-10 text-2xl font-bold">{currentSlide3.title}</h1>
-                        <h2 className="ml-10">{currentSlide3.details}</h2>
+                        <h1 className="left-4 text-2xl font-bold bottom-14 absolute">{currentSlide3.title}</h1>
+                        <h2 className="left-4 md:bottom-2 bottom-4 absolute">{currentSlide3.details}</h2>
                     </div>
                     </div>
 
                 </div>
             </div>
-            <div className="w-1/2 h-full relative justify-center">
-            <img src={currentSlide4.image} alt={`Slide ${setCurrentSlideIndex4}`} className="w-full h-full object-cover"/>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30 w-full h-full  justify-center">
-                        <h1 className="mt-96 ml-10 text-4xl font-bold">{currentSlide4.title}</h1>
-                        <h2 className="ml-10">{currentSlide4.details}</h2>
-                    </div>
+             {/* poster 4 */}
+            <div className="md:w-1/2 md:h-full h-full  justify-center relative">
+              <img src={currentSlide4.image} alt={`Slide ${setCurrentSlideIndex4}`} className="w-full h-full object-cover"/>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30 w-full h-full  justify-center">
+                        <h1 className="left-4 bottom-14 absolute text-4xl font-bold">{currentSlide4.title}</h1>
+                        <h2 className="left-4 md:bottom-2 bottom-4 absolute">{currentSlide4.details}</h2>
+              </div>
             </div>
           
         </div>

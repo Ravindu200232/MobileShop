@@ -3,6 +3,7 @@ import { CiSearch } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { CiShoppingCart } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 export default function Header(){
 
@@ -35,7 +36,7 @@ export default function Header(){
                 <tr>
                     <td><button className="ml-5 hover:text-gray-400"><CiHeart className="size-8"/></button></td>
                     <td><button className="ml-5  hover:text-gray-400"><CiShoppingCart className="size-8"/></button></td>
-                    <td><button className="ml-5  hover:text-gray-400"><CiUser className="size-8"/></button></td>
+                    <td><Link to="/login"><button className="ml-5  hover:text-gray-400"><CiUser className="size-8"/></button></Link></td>
                    
                 </tr>
 

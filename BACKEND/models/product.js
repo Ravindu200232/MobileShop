@@ -47,12 +47,14 @@ const productSchema = new mongoose.Schema({
     },
     brand_image : {
         type : String,
-        required : true
+        required : true,
+        default : "asdasdads"
     }
     ,
     Image : {
         type : String,
-        required : true
+        required : true,
+        default : "adsadasd"
     },
     created_at : {
         type : Date,

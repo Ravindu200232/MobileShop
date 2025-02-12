@@ -1,6 +1,9 @@
 
 import { useState } from "react"
-import "../css/login.css"
+import "../../css/login.css"
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 export default function SignUp(){
 
     const [firstName,setFirstName] = useState("");
@@ -11,6 +14,27 @@ export default function SignUp(){
     const [repassword,setRePassword] = useState("");
     const [file,setFile] = useState("");
 
+    const navigation = useNavigate();
+
+    function onSubmit(e){
+        e.preventDefault()
+        axios.post("http://localhost:4000/api/user",{
+            firstName : firstName,
+            lastName : lastName,
+            email : email,
+            password : password,
+            phone : phone,
+            role : "customer",
+           
+        }).then((res)=>{
+            toast.success(res.data.message)
+            navigation("/login")
+        }).catch((err)=>{
+            console.log(err)
+           toast.error(err.response.data.message)
+        })
+    }
+
     function handlePassword(e){
         let password = e.target.value
         setPassword(password)
@@ -19,14 +43,17 @@ export default function SignUp(){
     function handleRePassword(e) {
 
         let value = e.target.value
+       
         if(password === value){
             document.getElementById("showerr").innerHTML = "Match password";
             document.getElementById("showerr").style.color = "green"; 
+           
         }else{
             document.getElementById("showerr").innerHTML = "Dismatch password"
             document.getElementById("showerr").style.color = "red";
         }
         setRePassword(value)
+        
         
     }
     
@@ -50,7 +77,7 @@ export default function SignUp(){
     }
 
     function handleEmail(e){
-        let value = e.target.value.replace(/[^a-zA-Z0-9@]/g , "");
+        let value = e.target.value.replace(/[^a-zA-Z0-9@.]/g , "");
         setEmail(value)
     }
 
@@ -58,36 +85,36 @@ export default function SignUp(){
 
 
         <div className="bg-picture w-full h-screen flex justify-center items-center">
-           <form>
+           <form onSubmit={onSubmit}>
            <div className="w-[400px] h-[600px] backdrop-blur-2xl rounded-2xl flex flex-col  items-center relative">
                 <img src="/—Pngtree—smartphone shop sale logo design_5069958.png" className="w-[100px] h-[100px] absolute top-5 rounded-full shadow-2xl shadow-white"></img>
             
-                <input type="text" placeholder="First Name" className="w-[300px] h-[30px] bg-transparent placeholder-gray-300 text-white border-b-2 border-white text-xl mt-48"
+                <input type="text" placeholder="First Name" className="w-[300px] h-[30px] bg-transparent placeholder-gray-700 text-gray-700 border-b-2 border-gray-700 text-xl mt-48"
                 onChange={(e)=>{
                     handleFirstName(e)
                 }} value={firstName}></input>
-                <input type="text" placeholder="Last Name" className="w-[300px] h-[30px]  placeholder-gray-300 bg-transparent border-b-2 border-white text-xl mt-3"
+                <input type="text" placeholder="Last Name" className="w-[300px] h-[30px]  placeholder-gray-700 bg-transparent border-b-2 border-gray-700 text-xl mt-3"
                 onChange={(e)=>{
                     handleLastName(e)
                 }} value={lastName}></input>
-                <input type="email" placeholder="Email" className="w-[300px] h-[30px]  placeholder-gray-300 bg-transparent border-b-2 border-white text-xl mt-3"
+                <input type="email" placeholder="Email" className="w-[300px] h-[30px]  placeholder-gray-700 bg-transparent border-b-2 border-gray-700 text-xl mt-3"
                 onChange={(e)=>{
                     handleEmail(e)
                 }} value={email}></input>
-                <input type="text" placeholder="Phone Number" className="w-[300px] h-[30px]  placeholder-gray-300 bg-transparent border-b-2 border-white text-xl mt-3"
+                <input type="text" placeholder="Phone Number" className="w-[300px] h-[30px]  placeholder-gray-700 bg-transparent border-b-2 border-gray-700 text-xl mt-3"
                 onChange={(e)=>{
                     handlePhoneChange(e)
                 }} value={phone}></input>
-                <input type="file" placeholder="Profile Image" className="w-[300px] h-[30px] placeholder-gray-300 bg-transparent border-b-2 border-white text-xl mt-3" 
+                <input type="file" placeholder="Profile Image" className="w-[300px] h-[30px] placeholder-gray-700 bg-transparent border-b-2 border-gray-700 text-xl mt-3" 
                 onChange={(e)=>{
                     setFile(e);
                 }} value={file}></input>
-                <input type="password" placeholder="Password" className="w-[300px] h-[30px] placeholder-gray-300 bg-transparent border-b-2 border-white text-xl mt-3"
+                <input type="password" placeholder="Password" className="w-[300px] h-[30px] placeholder-gray-700 bg-transparent border-b-2 border-gray-700 text-xl mt-3"
                 onChange={(e)=>{
                     handlePassword(e)
                 }} value={password}></input>
                 <p id="showerr" className="font-bold"></p>
-                <input type="password" placeholder="Re-Password" className="w-[300px] h-[30px] placeholder-gray-300 bg-transparent border-b-2 border-white text-xl mt-3"
+                <input type="password" placeholder="Re-Password" className="w-[300px] h-[30px] placeholder-gray-700 bg-transparent border-b-2 border-gray-700 text-xl mt-3"
                  value={repassword} onChange={(e)=>{
                     handleRePassword(e)
                  }}></input>

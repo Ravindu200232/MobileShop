@@ -7,6 +7,7 @@ import productRoute from "./routes/productRoute.js";
 import jwt from "jsonwebtoken"
 import reviewRoute from "./routes/reviewRoute.js";
 import cors from "cors"
+import inquiryRoute from "./routes/inquiryRoute.js";
 
 dotenv.config();
 
@@ -40,6 +41,7 @@ DBconnection();
 app.use("/api/user",userRoute)
 app.use("/api/product",productRoute)
 app.use("/api/review",reviewRoute)
+app.use("/api/inquire",inquiryRoute)
 
 
 app.listen(4000 || process.env.PORT,()=>{

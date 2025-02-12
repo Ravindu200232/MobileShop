@@ -2,6 +2,7 @@ import User from "../models/user.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
+import { isHasAccount } from "./userPermision.js"
 
 dotenv.config()
 
@@ -15,7 +16,7 @@ export async function userRegister(req,res) {
             email : data.email
         })
         if(isEmailAlready){
-            res.json({
+            res.status(403).json({
                 message : "Email Already use"
             })
         }else{
@@ -80,6 +81,31 @@ export async function userLogin(req,res) {
         console.log(err)
         res.status(500).json({
             message : "Pleast try again"
+        })
+    }
+}
+
+export async function getUser(req,res) {
+    
+    try{
+        if(isHasAccount(req)){
+
+            const result = await User.findOne({
+                email : req.user.email
+            })
+            res.json({
+                userDetails : result
+            })
+            return
+        }
+        else{
+            req.status(403).json({
+                message : "plese login"
+            })
+        }
+    }catch(err){
+        res.json({
+            message : "Internal server error"
         })
     }
 }
