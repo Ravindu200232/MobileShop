@@ -1,96 +1,62 @@
 import { AiOutlineAppstoreAdd } from "react-icons/ai"; 
-import { useState } from "react"
-import { Link, Route, Routes } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { Link, Route, Routes, useNavigate } from "react-router-dom"
 import AddItem from "./addItem";
+import axios from "axios";
+import { toast } from "react-toastify";
+
+
+
+
 
 export default function Product(){
+      const [items,setItem] = useState([])
+      const [itemLoaded,setItemLoaded] = useState(false)
+      const navigate = useNavigate();
 
-   
+      useEffect(()=>{
 
+        if(!itemLoaded){
 
-    let sampleArr = [
-        {
-          "name": "Samsung Galaxy S24",
-          "category": "Smartphone",
-          "description": "Latest Samsung flagship smartphone with advanced AI features.",
-          "specification": "6.2-inch display, 8GB RAM, 128GB storage",
-          "features": "5G connectivity, 50MP camera, 4000mAh battery",
-          "brand": "Samsung",
-          "model_Number": "S24-128GB",
-          "price": "999",
-          "quantity_Stock": 50,
-          "warenty_Period": "2026-02-11T00:00:00.000Z",
-          "brand_image": "https://example.com/samsung-logo.png",
-          "Image": "https://example.com/samsung-s24.png",
-          "created_at": "2024-02-11T10:00:00.000Z"
-        },
-        {
-          "name": "Apple MacBook Pro 16",
-          "category": "Laptop",
-          "description": "High-performance laptop with Apple M3 Pro chip.",
-          "specification": "16-inch Retina Display, 32GB RAM, 1TB SSD",
-          "features": "M3 Pro Chip, Touch Bar, macOS Ventura",
-          "brand": "Apple",
-          "model_Number": "MBP16-1TB",
-          "price": "2499",
-          "quantity_Stock": 30,
-          "warenty_Period": "2027-01-15T00:00:00.000Z",
-          "brand_image": "https://example.com/apple-logo.png",
-          "Image": "https://example.com/macbook-pro-16.png",
-          "created_at": "2024-01-15T12:30:00.000Z"
-        },
-        {
-          "name": "Sony WH-1000XM5",
-          "category": "Headphones",
-          "description": "Industry-leading noise-canceling wireless headphones.",
-          "specification": "Bluetooth, 30-hour battery life, Adaptive Sound Control",
-          "features": "Active noise cancellation, Touch controls, Fast charging",
-          "brand": "Sony",
-          "model_Number": "WH1000XM5",
-          "price": "399",
-          "quantity_Stock": 100,
-          "warenty_Period": "2025-12-01T00:00:00.000Z",
-          "brand_image": "https://example.com/sony-logo.png",
-          "Image": "https://example.com/sony-wh1000xm5.png",
-          "created_at": "2023-12-01T08:45:00.000Z"
-        },
-        {
-          "name": "Dell XPS 13",
-          "category": "Laptop",
-          "description": "Ultra-thin and powerful laptop with 13.4-inch touchscreen.",
-          "specification": "Intel Core i7, 16GB RAM, 512GB SSD",
-          "features": "InfinityEdge Display, Backlit keyboard, Windows 11",
-          "brand": "Dell",
-          "model_Number": "XPS13-512GB",
-          "price": "1299",
-          "quantity_Stock": 25,
-          "warenty_Period": "2026-06-30T00:00:00.000Z",
-          "brand_image": "https://example.com/dell-logo.png",
-          "Image": "https://example.com/dell-xps13.png",
-          "created_at": "2024-06-30T14:20:00.000Z"
-        },
-        {
-          "name": "Bose SoundLink Revolve+",
-          "category": "Speakers",
-          "description": "Portable Bluetooth speaker with 360-degree sound.",
-          "specification": "Wireless, 17-hour battery life, Water-resistant",
-          "features": "360° sound, Voice assistant support, Built-in mic",
-          "brand": "Bose",
-          "model_Number": "SLRPlus",
-          "price": "299",
-          "quantity_Stock": 75,
-          "warenty_Period": "2025-09-20T00:00:00.000Z",
-          "brand_image": "https://example.com/bose-logo.png",
-          "Image": "https://example.com/bose-soundlink.png",
-          "created_at": "2023-09-20T09:10:00.000Z"
+          const token = localStorage.getItem("token");
+      axios.get("http://localhost:4000/api/product",{
+        headers: {Authorization: `Bearer ${token}`},
+      }).then(
+        (res)=>{
+          
+          setItem(res.data)
+          setItemLoaded(true)
         }
-      ]
+      ).catch((err)=>{
+        console.log(err);
+      })
+        }
+      
+      },[itemLoaded]);
 
-      const [items,setItem] = useState(sampleArr)
+      function handleDelete(key){
+        if(window.confirm("Are you sure you want to delete this item?")){
+          const token = localStorage.getItem("token");
+          axios.delete(`http://localhost:4000/api/product/${key}`,{
+            headers:{Authorization: `Bearer ${token}`}
+          }).then((res)=>{
+            setItemLoaded(false)
+            toast.success("Delete successfully")
+          }).catch((err)=>{
+            console.log(err)
+          })
+        }
+        
+      }
+
       
 
     return(
     <div className="w-full h-screen flex flex-col ">
+
+    {!itemLoaded && <div className="border-b w-[100px] h-[100px] my-4 border-b-green-500 rounded-full animate-spin">
+
+    </div>}
     
     <div className="w-full h-16 flex justify-center items-center text-[50px] font-semibold">
         PRODUCT
@@ -114,14 +80,17 @@ export default function Product(){
       <th className="p-3 border border-gray-300">Price</th>
       <th className="p-3 border border-gray-300">Quantity</th>
       <th className="p-3 border border-gray-300">Warranty Period</th>
+      <th className="p-3 border border-gray-300">Approve</th>
       <th className="p-3 border border-gray-300">Image</th>
+      <th className="p-3 border border-gray-300"></th>
+      <th className="p-3 border border-gray-300"></th>
     </tr>
     </thead>
 
   <tbody>
-    {items.map((product, index) => (
-      <tr key={index} className="odd:bg-white even:bg-gray-100 hover:bg-purple-100">
-        <td className="p-3 border border-gray-300">{index + 1}</td>
+    {items.map((product) => (
+      <tr key={product.key} className="odd:bg-white even:bg-gray-100 hover:bg-purple-100">
+        <td className="p-3 border border-gray-300">{product.key}</td>
         <td className="p-3 border border-gray-300">{product.name}</td>
         <td className="p-3 border border-gray-300">{product.category}</td>
         <td className="p-3 border border-gray-300">{product.description}</td>
@@ -132,9 +101,19 @@ export default function Product(){
         <td className="p-3 border border-gray-300">{product.price}</td>
         <td className="p-3 border border-gray-300">{product.quantity_Stock}</td>
         <td className="p-3 border border-gray-300">{product.warenty_Period}</td>
+        <td className="p-3 border border-gray-300">{product.isApprove ? "Approved" : "notApproved"}</td>
         <td className="p-3 border border-gray-300">
           <img src={product.Image} alt={product.name} className="w-12 h-12 object-cover rounded-md" />
         </td>
+        <td className="p-3 border border-gray-300">
+          <button className=" hover:text-white bg-blue-500 h-14 w-16 rounded-xl mb-3" onClick={()=>{
+            navigate('/admin/item/update/',{state:product})
+          }}>Update Item</button>
+          <button className=" hover:text-white bg-red-500 h-14 w-16 rounded-xl" onClick={()=>{handleDelete(product.key)}}>Delete</button>
+        
+        </td>
+       
+        
         </tr>
         ))}
     </tbody>

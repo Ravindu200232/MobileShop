@@ -2,7 +2,11 @@
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
-   
+    key : {
+        type : String,
+        required : true,
+        unquie : true
+    },
     name : {
         type : String,
         required : true
@@ -45,17 +49,23 @@ const productSchema = new mongoose.Schema({
         type : Date,
         required : true
     },
+    isApprove : {
+        type : Boolean,
+        required : true,
+        default : false
+    },
     brand_image : {
         type : String,
         required : true,
         default : "asdasdads"
-    }
+    } 
     ,
     Image : {
         type : String,
         required : true,
         default : "adsadasd"
     },
+    
     created_at : {
         type : Date,
         default : Date.now()

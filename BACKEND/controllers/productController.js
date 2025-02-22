@@ -102,8 +102,9 @@ export function productDelete(req,res){
 
         if(itIsAdmin(req)){
 
+
             Product.deleteOne({
-                _id : req.params.id
+                key : req.params.id
             }).then(
                 ()=>{
                     res.json({

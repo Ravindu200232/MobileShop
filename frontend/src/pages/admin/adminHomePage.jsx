@@ -11,6 +11,7 @@ import ReviewDetails from "./reviewDetails";
 import InquiryDetails from "./inquiryDetails";
 import AdminProfile from "./adminProfile";
 import AddItem from "./addItem";
+import ProductUpdate from "./productUpdate";
 export default function AdminHomePage(){
 
     return(
@@ -53,6 +54,7 @@ export default function AdminHomePage(){
                 <Route path="/reviewDetails" element={<ReviewDetails/>}/>
                 <Route path="/inquireDetails" element={<InquiryDetails/>}/>
                 <Route path="/item/additem/*" element={<AddItem/>}/>
+                <Route path="/item/update/*"element={<ProductUpdate/>}/>
             </Routes>
            </div>
            </div>

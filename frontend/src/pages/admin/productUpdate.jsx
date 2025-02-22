@@ -1,22 +1,31 @@
 import axios from "axios";
 import { useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export default function AddItem(){
+export default function ProductUpdate(){
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    const [productName,setProductName] = useState("");
-    const [category,setCategory] = useState("Laptop");
-    const [description,setDescription] = useState("");
-    const [specification,setSpecification] = useState("");
-    const [features,setFeatures] = useState("");
-    const [brand,setbrand] = useState("");
-    const [modelNumber,setModelNumber] = useState("");
-    const [price,setPrice] = useState("");
-    const [quantity,setQuantity] = useState("0");
-    const [warenty,setWarenty] = useState("0");
+    console.log(location)
+    const [productkey,setProductKey] = useState(location.state.key)
+    const [productName,setProductName] = useState(location.state.name);
+    const [category,setCategory] = useState(location.state.category);
+    const [description,setDescription] = useState(location.state.description);
+    const [specification,setSpecification] = useState(location.state.specification);
+    const [features,setFeatures] = useState(location.state.features);
+    const [brand,setbrand] = useState(location.state.brand);
+    const [modelNumber,setModelNumber] = useState(location.state.model_Number);
+    const [price,setPrice] = useState(location.state.price);
+    const [quantity,setQuantity] = useState(location.state.quantity_Stock);
+    const [warenty,setWarenty] = useState(location.state.warenty_Period);
+
+
+    function handleProductkey(e){
+        const value = e.target.value.replace(/[^a-zA-Z0-9\s]/g , "");
+        setProductKey(value)
+    }
 
     function handleproductName(e){
         const value = e.target.value.replace(/[^a-zA-Z0-9\s]/g , "");
@@ -42,7 +51,8 @@ export default function AddItem(){
         if(token){
 
             try{
-                const result = await axios.post("http://localhost:4000/api/product",{
+                const result = await axios.put(`http://localhost:4000/api/product/${productkey}`,{
+                    key : productkey,
                     name : productName,
                     category : category,
                     description : description,
@@ -61,6 +71,7 @@ export default function AddItem(){
 
                 toast.success(result.data.message)
                 navigate("/admin/item")
+                
                 
 
             }catch(err){
@@ -81,7 +92,12 @@ export default function AddItem(){
     return(
         <div className="h-screen w-full flex flex-col items-center justify-center mt-40">
             <div className="w-[500px] bg-white shadow-lg rounded-lg p-6">
-                <h2 className="text-2xl font-semibold mb-4">Add Item</h2>
+                <h2 className="text-2xl font-semibold mb-4">Update Item</h2>
+
+                <label className="block text-sm font-medium" >Product key</label>
+                <input type="text" className="w-full p-2 border rounded mb-3" disabled onChange={(e)=>{
+                   handleProductkey(e)
+                    }} value={productkey}  />
                 
                 <label className="block text-sm font-medium">Product Name</label>
                 <input type="text" className="w-full p-2 border rounded mb-3" onChange={(e)=>{
